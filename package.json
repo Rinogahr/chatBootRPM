@@ -4,7 +4,8 @@
   "description": "robo para chat do WhatsApp",
   "main": "robo.js",
   "scripts": {
-    "test": "npm dev"
+    "test": "npm dev",
+    "start": "node robo.js"
   },
   "author": "Rodrigo Maciel",
   "license": "ISC",
