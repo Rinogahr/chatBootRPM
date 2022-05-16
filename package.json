@@ -1,0 +1,14 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "description": "robo para chat do WhatsApp",
+  "main": "robo.js",
+  "scripts": {
+    "test": "npm dev"
+  },
+  "author": "Rodrigo Maciel",
+  "license": "ISC",
+  "dependencies": {
+    "@wppconnect-team/wppconnect": "^1.13.1"
+  }
+}
