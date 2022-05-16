@@ -1,5 +1,8 @@
 const wppconnect = require('@wppconnect-team/wppconnect');
-// const { start } = require('repl');
+
+
+let userStages = [];
+let objetoCli = [];
 
 wppconnect.create({
     session: 'session',
@@ -11,7 +14,7 @@ wppconnect.create({
 
 function start(cliente)
 {
-    let objetoCli = [];
+    
     cliente.onMessage((message) => {
         objetoCli = [
             dadosCli = {
@@ -34,24 +37,33 @@ function start(cliente)
         ]
 
         if(objetoCli[0].isGroupMsg){
-            console.log('meu objeto cliente dentro do if  dadosCli  ::> dadosCli',objetoCli[0]);
-            console.log('meu objeto cliente dentro do if  dadosCli  ::> dadosSender',objetoCli[1]);
-            console.log('objetoCli.dadosCli.isGroupMsg ::>  ',objetoCli[0].isGroupMsg);
+            // console.log('meu objeto cliente dentro do if  dadosCli  ::> dadosCli',objetoCli[0]);
+            // console.log('meu objeto cliente dentro do if  dadosCli  ::> dadosSender',objetoCli[1]);
             return;
         }else{
-            
-            console.log('meu objeto cliente dentro do ELSE  dadosCli  ::> dadosCli',objetoCli[0]);
-            console.log('meu objeto cliente dentro do ELSE  dadosCli  ::> dadosSender',objetoCli[1]);
-            console.log('objetoCli.dadosCli.isGroupMsg ::>  ',objetoCli[0].isGroupMsg);
-            // console.log('Mensagem digitada pelo usuário:' + message.body);
-            // cliente.sendText(message.from, 'PING! Mande um PONG para mim:')
-            //     .then((res) => {
-            //         console.log('SUCESSO!: ', res );
-            //     })
-            //     .catch((error) => {
-            //         console.log('ERRO: ', error);
-            //     });
+            // console.log('meu objeto cliente dentro do ELSE  dadosCli  ::> dadosCli',objetoCli[0]);
+            // console.log('meu objeto cliente dentro do ELSE  dadosCli  ::> dadosSender',objetoCli[1]);
+            console.log('Mensagem enviada pelo usuário:' + objetoCli[0].body);
+            stage(objetoCli,objetoCli[0].body);            
         }
        
     });
+}
+
+function stage(cl,msn)
+{
+    stage = userStages[msn.from];
+    console.log('cl',cl);
+    console.log('msn',msn);
+    switch( stage ){
+        case 'Nome':
+            const nome = msn.body;
+            sendWppMessage(msn, cl.from, `
+                 Olá sou o *Rinogahr* ! *CHATBOT* de Rodrigo Maciel,
+                 no momento o senhor Rodrigo está muito ocupado e possa ser que não te responda,
+                 por favor se for muito importante mesmo digite *é caso de vida ou morte*.` );
+                 userStages[msn.from] = 'é caso de vida ou morte';
+                 break;
+    }
+    // cl.sendText(objetoCli.from, );
 }
